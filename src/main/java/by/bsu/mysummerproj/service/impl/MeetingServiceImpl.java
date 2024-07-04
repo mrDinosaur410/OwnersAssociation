@@ -45,28 +45,36 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
-    public void setUsers(Integer id, String[] users) throws ParseException {
-        Meeting meeting = this.meetingRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Meeting not found"));
+    public void addUsers(Integer id, String[] users) throws ParseException {
+        Meeting meeting = this.getById(id);
+        List<Person> persons = meeting.getPersons();
+        for (String userId : users) {
+            try {
+                Person person = personService.getById(Integer.valueOf(userId));
+                persons.add(person);
+            } catch (NumberFormatException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        meeting.setPersons(persons);
+        meetingRepository.save(meeting);
+    }
+
+    @Override
+    public void removeUsers(Integer id, String[] users) throws ParseException {
+        Meeting meeting = this.getById(id);
         List<Person> persons = new ArrayList<>();
         for (String userId : users) {
             try {
                 Person person = personService.getById(Integer.valueOf(userId));
                 persons.add(person);
             } catch (NumberFormatException e) {
-                // Log or handle the invalid user ID
-                continue;
+                System.out.println(e.getMessage());
             }
         }
-        meeting.setPersons(persons);
+        List<Person> removedUsers = meeting.getPersons();
+        removedUsers.removeAll(persons);
+        meeting.setPersons(removedUsers);
         meetingRepository.save(meeting);
-//        Meeting meeting = this.meetingRepository.findById(id).orElseThrow(NoSuchElementException::new);
-//        meeting.setPersons(
-//                Arrays
-//                        .stream(users)
-//                        .map(Integer::valueOf)
-//                        .map(personService::getById)
-//                        .collect(Collectors.toList())
-//        );
-//        meetingRepository.save(meeting);
     }
 }

@@ -37,8 +37,13 @@ public class MeetingController {
 
     @GetMapping("/meetings/{id}")
     public String getMeetingById(final Model model, @PathVariable Integer id) {
-        model.addAttribute("meeting", meetingService.getById(id));
-        model.addAttribute("persons", personService.getAll());
+        final Meeting meeting = meetingService.getById(id);
+        model.addAttribute("meeting", meeting);
+//        System.out.println(personService.getAll().removeAll(meeting.getPersons()));
+        model.addAttribute("persons", personService.getAll().stream()
+                .filter(item -> !meeting.getPersons().contains(item))
+                .toList());
+        model.addAttribute("attendees", meeting.getPersons());
         return "meeting/view";
     }
 
@@ -78,12 +83,24 @@ public class MeetingController {
 
     @PostMapping("/meetings/{id}/update")
     public String updateMeeting(
-            @Valid final String[] persons,
+            @Valid final String[] idList1,
             Model model,
             @PathVariable Integer id
     ) throws ParseException {
-        meetingService.setUsers(id, persons);
-//        System.out.println(persons);
+        meetingService.addUsers(id, idList1);
+//        System.out.println("person = ");
+//        System.out.println(idList[0]);
         return "redirect:/admin/meetings/" + id;
     }
+
+    @PostMapping("/meetings/{id}/remove-users")
+    public String removeUsersMeeting(
+            @Valid final String[] idList2,
+            Model model,
+            @PathVariable Integer id
+    ) throws ParseException {
+        meetingService.removeUsers(id, idList2);
+        return "redirect:/admin/meetings/" + id;
+    }
+
 }

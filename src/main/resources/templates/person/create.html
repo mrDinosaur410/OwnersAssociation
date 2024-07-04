@@ -18,47 +18,10 @@
             color: crimson;
             text-align: center;
         }
-        #add-user-btn {
-            display: none;
-        }
-
-        #users-dropdown:hover #add-user-btn {
-            display: block;
-        }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Owners Association</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Meetings</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Forum</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Admin </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li id="users-dropdown" class="dropdown-item">
-                            Users
-                            <button id="add-user-btn" class="btn btn-primary">Add a new user</button>
-                        </li>
-                        <li><a class="dropdown-item active"  aria-current="page" href="#">Flats</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<div th:insert="~{blocks/admin-header :: nav-admin}"></div>
 <div class="container py-6 h-100">
     <div class="row justify-content-center align-items-center h-100">
         <div class="col-12 col-lg-9 col-xl-7">

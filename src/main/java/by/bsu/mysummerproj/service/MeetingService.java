@@ -13,5 +13,6 @@ public interface MeetingService {
 
     Meeting create(MeetingDTO dto) throws ParseException;
 
-    void setUsers(Integer id, String[] users) throws ParseException;
+    void addUsers(Integer id, String[] users) throws ParseException;
+    void removeUsers(Integer id, String[] users) throws ParseException;
 }
