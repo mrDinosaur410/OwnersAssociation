@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Persons</title>
+    <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+</head>
+<body>
+<div class="container my-5">
+    <h1>Topics</h1>
+    <ul data-th-each="topic : ${topics}">
+        <li>
+            <span data-th-text="${topic.date}">1.01.2001</span>
+            <span data-th-text="${topic.name}">How to pay</span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

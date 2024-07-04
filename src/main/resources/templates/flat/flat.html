@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Persons</title>
+<!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+</head>
+<body>
+<div class="container my-5">
+    <h1>Flats</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Number</th>
+            <th>Owner</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-th-each="flat : ${flats}">
+            <td data-th-text="${flat.flatnumber}">103</td>
+            <td data-th-text="${flat.person}">John Doe</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

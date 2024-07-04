@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Meeting</title>
+</head>
+<body>
+<div>
+    <h1>Meeting</h1>
+    <div>
+        <p data-th-text="${meeting.meetingdate}">Date: ${#dates.format(meeting.date, 'dd-MMM-yyyy')}</p>
+        <p data-th-text="${meeting.venue}">Venue: ${meeting.venue}</p>
+        <p data-th-text="${meeting.protocol}">Protocol: {}</p>
+        <form data-th-action = "@{/admin/meetings/{id}/update(id=${meeting.getId()})}" method="post">
+        <ul data-th-each="person : ${persons}">
+            <li>
+                <input type="checkbox" name="persons[]" value="${person.id}" />
+                <span data-th-text="${person?.surname}"></span>
+                <span data-th-text="${person.name}"></span>
+                <span data-th-text="${person?.patronymic}"></span>
+                <span data-th-text="${person.contact}"></span>
+            </li>
+        </ul>
+            <button type="submit">Save</button>
+        </form>
+        <!--        <p>Attendees: ${meeting.attendees.join(', ')}</p>-->
+    </div>
+</div>
+
+</body>
+</html>
